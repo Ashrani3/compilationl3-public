@@ -6,6 +6,33 @@ lettre = [['a' .. 'z'] + ['A' .. 'Z']];
 
 Tokens
 
+ID = lettre+;
+NB = [0 .. 9]+;
+PO = '(';
+PF = ')';
+CO = '[';
+CF = ']';
+plus ='+';
+minus ='-';
+mult ='*';
+div ='/';
+mod ='%';
+vir = ',';
+pvir = ';';
+ou = '|';
+et = '&';
+eq = '=';
+inf = '<';
+non = '!';
+AO = '{';
+AF = '}'
+entier = 'entier';
+si = 'si';
+alors = 'alors';
+sinon = 'sinon';
+tantque = 'tantque';
+faire = 'faire';
+retour = 'retour';
 espaces = (' ' | 13 | 10)+;
 commentaire= '#' [[0 .. 0xffff] - [10 + 13]]* (10 | 13 | 10 13);
 
@@ -15,5 +42,78 @@ espaces, commentaire;
 
 Productions
 
-programme = optdecvar listedecfonc ;
+programme = loptdecvar listedecfonc ;
 
+loptdecvar = {listedecvar} ldecvar pvir |
+             {listedecvarvide} ;
+
+ldecvar = {decvar+listevar} decvar ldecvarbis |
+          {ldecvarvide} ;
+
+ldecvarbis = {decvar+liste} vir decvar ldecvarbis |
+             {listevarbisvide} ;
+
+decvar = {entier} entier ID |
+         {tabentier} ID CO NB CF;
+
+listedecfonc = {listedecfonc} decfonc listedecfonc |
+               {listedecfoncvide} ;
+
+decfonc = ID PO ldecvar PF loptdecvar Ibloc;
+
+appelfonc = ID PO lExp PF;
+
+lExp = {exp+listeExp} Exp lExpbis |
+       {listeExpvide} ;
+
+lExpbis = {Exp+listeExpbis} vir E lExpbis |
+          {listeExpbisvide};
+
+Exp = {symbou} Exp ou Exp1 |
+      {typeExp1} Exp1;
+
+Exp1 = {symbet} Exp1 et Exp2 |
+       {typeExp2} Exp2;
+
+Exp2 = {symbEgal} Exp2 eq Exp3 |
+       {symbInf} Exp2 inf Exp3 |
+       {typeExp3} Exp3;
+
+Exp3 = {symbPlus} Exp3 plus Exp4 |
+       {symbMoins} Exp3 minus Exp4 |
+       {typeExp4} Exp4;
+
+Exp4 = {symbMult} Exp4 mult Exp5 |
+       {symbDiv} Exp4 div Exp5 |
+       {typeExp5} Exp5;
+
+Exp5 = {symbNon} non Exp5 |
+       {typeExp6} Exp6;
+
+Exp6 = {Exp6} PO Exp PF |
+       {Nombre} NB |
+       {Appelfonc} appelfonc |
+       {Variable} var;
+
+var = {varInt} ID |
+      {tabVarInt} ID CO Exp CF;
+
+Inst = {Affectation} IAffect |
+       {SiAlors} ISI |
+       {TantQue} ITQ |
+       {IAppelFonc} IAPP |
+       {BlocI} Ibloc |
+       {Retour} IRet |
+       {Ecriture} IECR |
+       {Lecture} ILEC;
+
+IAffec = var eq Exp pvir;
+
+ISI = {NoSinon} si Exp alors Ibloc |
+      {Sinon} si Exp alors Ibloc sinon Ibloc;
+
+ITQ = tantque Exp faire Ibloc;
+
+IAPP = appelfonc;
+
+Ibloc = AO lInst AF;
