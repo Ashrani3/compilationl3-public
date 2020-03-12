@@ -1,9 +1,8 @@
 entier a;
 main()
 {
-si (0 ) alors
+si 0 alors
 {ecrire(1);
 }
-sinon
-{ecrire(0);}
+ecrire(0);
 }
