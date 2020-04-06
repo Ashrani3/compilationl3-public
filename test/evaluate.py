@@ -197,11 +197,11 @@ def printEvaluationResult(destination, evaluationResult, useColor) :
 if __name__ == "__main__" :
 
   inputFiles = findInputFiles()
-  deleteCompilationOutputs()
+  #deleteCompilationOutputs()
 
-  compileCompiler()
-  compileInputFiles(inputFiles)
-  deleteClasses()
+  #compileCompiler()
+  #compileInputFiles(inputFiles)
+  #deleteClasses()
 
   saEvaluation = evaluateSa(inputFiles)
   tsEvaluation = evaluateDiff(inputFiles, ".ts", "ts-ref/", "Table des Symboles")
