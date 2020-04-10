@@ -78,31 +78,61 @@ public class Sa2c3a extends SaDepthFirstVisitor<C3aOperand> {
 
     @Override
     public C3aOperand visit(SaExpSub node) {
+        C3aTemp to = c3a.newTemp();
+        SaExp op1 = node.getOp1();
+        SaExp op2 = node.getOp2();
+        visit(op1);
+        visit(op2);
         return super.visit(node);
     }
 
     @Override
     public C3aOperand visit(SaExpMult node) {
+        C3aTemp to = c3a.newTemp();
+        SaExp op1 = node.getOp1();
+        SaExp op2 = node.getOp2();
+        visit(op1);
+        visit(op2);
         return super.visit(node);
     }
 
     @Override
     public C3aOperand visit(SaExpDiv node) {
+        C3aTemp to = c3a.newTemp();
+        SaExp op1 = node.getOp1();
+        SaExp op2 = node.getOp2();
+        visit(op1);
+        visit(op2);
         return super.visit(node);
     }
 
     @Override
     public C3aOperand visit(SaExpInf node) {
+        C3aTemp to = c3a.newTemp();
+        SaExp op1 = node.getOp1();
+        SaExp op2 = node.getOp2();
+        visit(op1);
+        visit(op2);
         return super.visit(node);
     }
 
     @Override
     public C3aOperand visit(SaExpEqual node) {
+        C3aTemp to = c3a.newTemp();
+        SaExp op1 = node.getOp1();
+        SaExp op2 = node.getOp2();
+        visit(op1);
+        visit(op2);
         return super.visit(node);
     }
 
     @Override
     public C3aOperand visit(SaExpAnd node) {
+        C3aTemp to = c3a.newTemp();
+        SaExp op1 = node.getOp1();
+        SaExp op2 = node.getOp2();
+        visit(op1);
+        visit(op2);
         return super.visit(node);
     }
 

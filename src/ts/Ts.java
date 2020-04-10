@@ -68,8 +68,15 @@ public class Ts
 	else
 	    return item.getTable();
     }
-    
-	 
+
+	public boolean containsVar(String identif) {
+		return variables.containsKey(identif);
+	}
+
+	public boolean containsFonc(String identif) {
+		return fonctions.containsKey(identif);
+	}
+
     public void affiche(PrintStream out){
 	ArrayList< Map.Entry< String, TsItemVar> > stVar = new ArrayList<Map.Entry< String, TsItemVar>>(this.variables.entrySet());
   Collections.sort(stVar, new Comparator<Map.Entry< String, TsItemVar>>() {
